@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title >Listado Wifi</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+    <img src="assets/imgs/Fichados.png">
+  </div>
+
+  <ion-content>
+      <ion-list>
+         <ion-item>      <!-- <ion-item *ngFor="let x of networks" -->
+             <ion-avatar item-start>
+              <img src="assets/icon/favicon.ico">
+             </ion-avatar >
+            <p>SSID: {{networksWifi[1].SSID}}</p> <!--  {{networksWifi[1].SSID}} -->
+          </ion-item>
+      </ion-list>
+  </ion-content>
+
+
+  <button ion-button color="secondary" block menuToggle> Iniciar </button>
+  <button ion-button color="danger" block >Cancelar</button>
+</ion-content>
