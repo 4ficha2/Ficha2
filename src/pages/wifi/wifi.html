@@ -18,9 +18,16 @@
              <ion-avatar item-start>
               <img src="assets/icon/favicon.ico">
              </ion-avatar >
-            <p>SSID: {{networksWifi[1].SSID}}</p> <!--  {{networksWifi[1].SSID}} -->
+            <ion-input value="Redes encontradas: {{networksString.length}}"></ion-input>  <!--  {{networksWifi[1].SSID}} -->
           </ion-item>
-      </ion-list>
+          <ion-item *ngFor="let x of networksString">      <!-- <ion-item *ngFor="let x of networks" -->
+            <ion-avatar item-start>
+             <img src="assets/icon/favicon.ico">
+            </ion-avatar >
+           <ion-input value={{x}}></ion-input>  <!--  {{networksWifi[1].SSID}} -->
+         </ion-item>
+
+        </ion-list>
   </ion-content>
 
 
