@@ -7,30 +7,30 @@ import { HotspotNetwork } from '@ionic-native/hotspot';
   templateUrl: 'wifi.html'
 })
 export class wifiComponent {
+  [x: string]: any;
 
-  networksString: Array<string>=["Primero", "Segundo"];
-  networksWifi: any;
+  private networksString: Array<string>=["Actualiza pantalla!!"];
+  private networksWifi: any;
   
-  constructor(private hotspot: Hotspot) {
-        
+  constructor(private hotspot: Hotspot) { 
+    
     //Uso el nuevo servicio
     //Este servicio no funciona en emulador web (ionic serve) pues requiere Cordova
     //Cordova facilita el wifi, y si corre en emulador web no va
     this.hotspot.scanWifi().then(
       (networks: Array<HotspotNetwork>) => 
       {
-        console.log(networks);
-        //alert("scanWifi(0): " + networks[0].SSID);
-        this.actualizaWifi(networks);
+        alert("Listado redes wifi actualizado");
+
+        this.networksString[0]=networks[0].SSID;
+        this.networksString[1]="L:"+networks.length;
+        
+        for (let i=0; i<networks.length;i=i+1){
+          this.networksString[i]=networks[i].SSID +" - "+ networks[i].BSSID;
+        }
       }
     );
-   
+
   }
 
-  private actualizaWifi(redes: Array<HotspotNetwork>){
-    //Mirar para actualizar esta variable desde la promise then()
-    //alert(redes[1].SSID);
-    this.networksWifi=redes;
-    alert(this.networksWifi[1].SSID);
-  }
 }
