@@ -19,9 +19,8 @@ export class wifiComponent {
     //Cordova facilita el wifi, y si corre en emulador web no va
     
     //Compruebo si esta activo el wifi
-    this.hotspot.isAvailable().then(
+    this.hotspot.isAvailable().then((flag: boolean) =>
       //ESta funcion (isAvailable) indica si existe wifi ... NO si esta activo o no
-      (flag: boolean) => 
       {
         if (flag) {
           alert("Wifi activo. Bien !!");
@@ -46,16 +45,13 @@ export class wifiComponent {
     );
     
     //alert("Estado wifi: ");
-    
-
-
 
 
   }
 
-  private buscarWifi(): void{
-    //Busco el listado de redes wifi visibles y actualizo el atributo global networksString[]
-    //Llamo a esta funcion cuando he comprobado que wifi esta on para mejorar estabilidad
+  private buscarWifi(): void {
+  //Busco el listado de redes wifi visibles y actualizo el atributo global networksString[]
+  //Llamo a esta funcion cuando he comprobado que wifi esta on para mejorar estabilidad
     this.hotspot.scanWifi().then(
       (networks: Array<HotspotNetwork>) => 
       {
