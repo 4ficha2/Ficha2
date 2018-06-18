@@ -18,7 +18,7 @@ import { Hotspot } from '@ionic-native/hotspot';
     MyApp,
     HomePage,
     ListPage,
-    wifiComponent
+    //wifiComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +29,7 @@ import { Hotspot } from '@ionic-native/hotspot';
     MyApp,
     HomePage,
     ListPage,
-    wifiComponent
+    //wifiComponent
   ],
   providers: [
     Hotspot,

@@ -13,7 +13,7 @@ import { wifiComponent } from '../pages/wifi/wifi';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = wifiComponent;
+  rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -24,7 +24,7 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
-      { title: 'Listado wifi', component: wifiComponent }
+      //{ title: 'Listado wifi', component: wifiComponent }
     ];
 
   }
