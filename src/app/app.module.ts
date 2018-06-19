@@ -11,6 +11,8 @@ import { ListPage } from '../pages/list/list';
 import { wifiComponent } from '../pages/wifi/wifi';
 
 import { Hotspot } from '@ionic-native/hotspot';
+import { IonicStorageModule } from '@ionic/storage';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { Hotspot } from '@ionic-native/hotspot';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
