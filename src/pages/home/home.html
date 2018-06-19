@@ -1,5 +1,9 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
     <ion-title text-center>Iniciar Sesión</ion-title>
   </ion-navbar>
 </ion-header>
@@ -9,22 +13,20 @@
     <img src="assets/imgs/Fichados.png">
   </div>
 
-
   <ion-list>
 
     <ion-item>
       <ion-label stacked>Usuario</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="miLogin.login"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Contraseña</ion-label>
-      <ion-input type="password"></ion-input>
+      <ion-input type="password" [(ngModel)]="miLogin.pwd" required pattern=".{4,10}"></ion-input>
     </ion-item>
 
   </ion-list>
 
-
-  <button ion-button color="secondary" block menuToggle> Iniciar </button>
-  <button ion-button color="danger" block>Cancelar</button>
+  <button ion-button color="secondary" block (click)="logIn()"> Entrar </button>
+  <button ion-button color="danger" block menuToggle>Cancelar</button>
 </ion-content>
