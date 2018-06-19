@@ -8,7 +8,7 @@ export class Login {
 export interface User {
     userID:     number;             //0
     userName:   string;             //angel
-    pwd:        string;             //1234
+    pin:        string;             //1234
     token:      number;             //9990
     eventList:  [string];           //["00", "01", "10"]
     welcome:    string;             //"Mensaje del profesor para Angel",

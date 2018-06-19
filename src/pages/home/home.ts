@@ -87,6 +87,7 @@ export class HomePage {
               //Almaceno el token facilitado 
               this.storage.set("TOKEN", OK);
               //Salto a la pagina de FIchar !! (por fin dejo esta pagina !!)
+              alert("Usario autenticado correctamente (token: "+OK+" )")
             }
         },
         KO=>{

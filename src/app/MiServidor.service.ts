@@ -78,7 +78,7 @@ export class MiServidor {
                     observer.next(-1);
                 }
             );
-            observer.complete();
+
         });
         return token;
     }
@@ -123,7 +123,7 @@ export class MiServidor {
                 token=-1;
             }
             else{
-                if (usuarioEncontrado.pwd!=password){
+                if (usuarioEncontrado.pin!=password){
                     console.log("Password no coincide");
                     token=-1;
                 }
