@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { Login } from '../../app/Ficha2.model';
 import { MiServidor } from '../../app/MiServidor.service';
 import { Storage } from '@ionic/storage';
-//import { Observable } from "rxjs/Observable";
-
 
 @Component({
   selector: 'page-home',
@@ -20,30 +18,12 @@ export class HomePage {
 
   //Constructor e inicializacion del componente
   //-----------------------------------------//
-  //constructor(private miServidor: MiServidor) {
   constructor(private storage: Storage,
               private servicioServidor: MiServidor) {
     //Inicializo los inputs
     this.miLogin= new Login;
-    this.miLogin.login="angel";
-    this.miLogin.pwd="qwerty";
-    
-    //Pruebo a subscribirme a un observable creado por mi
-    /*  
-    this.servicioServidor.observerToken.subscribe(
-      OK=>{
-          console.log("Respuesta enviarLogin: OK");
-          console.log(OK);
-      },
-      KO=>{
-          console.log("Respuesta enviarLogin: KO");
-          console.log(KO);
-      },
-      ()=>{
-          console.log("Respuesta enviarLogin: complete()");
-      }
-    );*/
-
+    this.miLogin.login="angel";   //Valores por defecto
+    this.miLogin.pwd="1234";    //Valor por defecto
   }
 
   //Funciones y metodos locales
@@ -51,10 +31,12 @@ export class HomePage {
 
   logIn(){
   //Compongo el objeto Login a enviar y lo mando al servidor
-        console.log("Login: " + this.miLogin.login);
-        console.log("Password: " +this.miLogin.pwd);
+  //Recoge inputs del forumlario
+  //Cifra el password la clave guardada en storage local
+  //Almacena en storage el token recibido en caso de autenticacion Ok
 
     //1. Cifro el password antes de enviarlo
+    //La llamada y gestion del token es dentro de la promesa
     //Leo (o creo si no existe aun) una KEY de cifrado del/en el storage
     this.storage.get("KEY").then((value) => {
       if (value==null){   //si no existe KEY creo una KEY      
