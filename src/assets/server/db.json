@@ -1,0 +1,107 @@
+{
+    "posts": [
+        {
+            "id": 0,
+            "response": "response1"
+        },
+        {
+            "id": 1,
+            "response": "response2"
+        },
+        {
+            "id": 2,
+            "response": "response3"
+        }
+    ],
+    "wifiEventos": [
+        {
+            "wifiID": 0,
+            "wifiName":"GET06-06",
+            "eventArray": [
+                {
+                    "eventID": "00",
+                    "eventName": "Ionic Course",
+                    "users": ["angel", "dani", "obdulia"]
+                },
+                {
+                    "eventID": "01",
+                    "eventName": "Ficha2",
+                    "users": ["angel", "dani"]
+                }
+            ] 
+        },
+        {
+            "wifiID": 1,
+            "wifiName":"GET12-12",
+            "eventArray": [
+                {
+                    "eventID": "10",
+                    "eventName": "Privado",
+                    "users": ["angel"]
+                }
+            ] 
+        }
+    ],
+    "users": [
+        {
+            "userID": 0,
+            "userName": "angel",
+            "pin": "1234",
+            "token": 9990,
+            "eventList": [
+                "00",
+                "01",
+                "10"
+            ],
+            "welcome": "Mensaje del profesor para Angel",
+            "history": [
+                {"date":"11/06/2018", "eventID": "00", "status": "late", "comments": "Problemas de trafico"},
+                {"date":"11/06/2018", "eventID": "01", "status": "in", "comments": ""},
+                {"date":"11/06/2018", "eventID": "10", "status": "late", "comments": "Me quede dormido"}, 
+                {"date":"12/06/2018", "eventID": "00", "status": "in", "comments": ""},
+                {"date":"13/06/2018", "eventID": "00", "status": "in", "comments": ""} 
+            ]
+        },
+        {
+            "userID": 1,
+            "userName": "dani",
+            "pin": "1234",
+            "token": 9991,
+            "eventList": [
+                "00",
+                "01"
+            ],
+            "welcome": "Mensaje del profesor para Dani",
+            "history": [
+                {"date":"11/06/2018", "eventID": "00", "status": "late", "comments": "Problemas de trafico"},
+                {"date":"11/06/2018", "eventID": "01", "status": "in", "comments": ""},
+                {"date":"12/06/2018", "eventID": "00", "status": "in", "comments": ""},
+                {"date":"13/06/2018", "eventID": "00", "status": "in", "comments": ""} 
+            ]            
+        },
+        {
+            "userID": 2,
+            "userName": "obdulia",
+            "pin": "4321",
+            "token": 9992,
+            "eventList": [
+                "00"
+            ],
+            "welcome": "Mensaje del profesor para Obdulia",
+            "history": [
+                {"date":"11/06/2018", "eventID": "00", "status": "late", "comments": "Problemas de trafico"},
+                {"date":"12/06/2018", "eventID": "00", "status": "in", "comments": ""},
+                {"date":"13/06/2018", "eventID": "00", "status": "in", "comments": ""} 
+            ]            
+        },
+        {
+            "userID": 3,
+            "userName": "jose",
+            "pin": "4321",
+            "token": 9993,
+            "eventList": [],
+            "welcome": "",
+            "history": []            
+        }
+    ]
+}
