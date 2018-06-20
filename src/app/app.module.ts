@@ -13,6 +13,7 @@ import { wifiComponent } from '../pages/wifi/wifi';
 import { Hotspot } from '@ionic-native/hotspot';
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
+import { FicharPage } from '../pages/fichar/fichar';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     HomePage,
     ListPage,
+    FicharPage
     //wifiComponent
   ],
   imports: [
@@ -33,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     HomePage,
     ListPage,
+    FicharPage
     //wifiComponent
   ],
   providers: [
