@@ -12,11 +12,12 @@ import { VarGlobal } from '../../app/MiVarGlobal.service';
 export class FicharPage {
 
   private listadoWifis: Array<string>;      //Objeto de prueba para html
-  private listadoEventos:Array<string>=["event1", "00", "01", "10"];  //Objeto de prueba para html
+  private listadoEventos:Array<string>;     //Objeto de prueba para html
   private miWifiIndex: number;       //wifi seleccionado
   private miEventoIndex: number;     //Evento seleccionado
   private usuario: string;      //TODO: hay que almacenar globalmente el usuario
-  private myDate: Date; 
+  private myDate: Date;
+  private myTime: string; 
   
 
 
@@ -32,6 +33,18 @@ export class FicharPage {
     console.log('Arranco el componente FicharPage');
     //Solicito el listado de wifi visibles
     this.listadoWifis=["wifi1", "wifi2"];         //Listado de prueba
+ 
+    //Actualizo la hora
+    let dt = new Date();
+    
+    let month = (dt.getMonth()+1);
+    let mes = month.toString();
+    let anio = dt.getFullYear().toString();
+    let dia = dt.getDate().toString();
+    let horas = dt.getHours().toString();
+    let minutos = dt.getMinutes().toString();
+    
+    this.myTime = horas + ":" + minutos + "  del  " + dia + "/" + mes + "/"+anio;
   
   }
 

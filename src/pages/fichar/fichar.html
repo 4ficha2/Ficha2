@@ -10,8 +10,9 @@
 <ion-content padding>
   <br>
   <div class="avatar">
-    <img src="../../assets/imgs/Fichados.png" />
-    <ion-textarea style="text-align-last: center;" [(ngModel)]="this.usuario"></ion-textarea>
+    <img *ngIf="!this.usuario" src="../../assets/imgs/Fichados.png" />
+    <img *ngIf="this.usuario" src="../../assets/imgs/acachonAvatar.png" />
+    <ion-textarea readonly style="text-align-last: center;" [(ngModel)]="this.usuario"></ion-textarea>
   </div>
 
   <br><br>
@@ -35,12 +36,10 @@
       </ion-item>
     </div>
 
-  <div id="fecha">
-      <p>Mostrar la fecha</p>
-  </div>
-  <div id="hora">
-    <p>Mostrar la hora</p>
-  </div>
+  <br><br><br><br>
+  <ion-item>
+    <ion-label>{{myTime}}</ion-label>
+  </ion-item>
 
-  <button *ngIf="listadoEventos.length>0" type="submit" ion-button block (click)="botonFichar()">Fichar</button>
+  <button *ngIf="listadoEventos" type="submit" ion-button block (click)="botonFichar()">Fichar</button>
 </ion-content>

@@ -40,9 +40,9 @@ export class MiServidor {
                 OK=>{                                           //Si no estaba aun registrado
                     //Evaluo a nivel de servidor los datos
                     //1. Localizo al usuario
-                    let usuario= OK.filter(usuario => usuario.userName == miLogin);
+                    let usuario: any = OK.filter(usuario => usuario.userName == miLogin);
                     //2. Localizo el evento
-                    let evento= usuario[0].eventList.filter(evento => evento.eventName==miEvento);
+                    let evento : any = usuario[0].eventList.filter((x: any ) => x.eventName==miEvento);
                     //3. Reviso el estado de checkIn
                     //TODO: falta revisar la hora para indicar si tarde o no.
                     
