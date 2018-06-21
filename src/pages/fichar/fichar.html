@@ -1,5 +1,8 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title text-center>Fichar</ion-title>
   </ion-navbar>
 </ion-header>
@@ -8,14 +11,14 @@
   <br>
   <div class="avatar">
     <img src="../../assets/imgs/Fichados.png" />
+    <ion-textarea style="text-align-last: center;" [(ngModel)]="this.usuario"></ion-textarea>
   </div>
-  <div style="text-align: center;">Usuario</div>    <!-->Meter aqui el nombre del usuario<-->
 
   <br><br>
   <div>
     <ion-item>
       <ion-label item-start>Listado de wifispots</ion-label>
-      <ion-select interface="popover" placeholder="wifi">
+      <ion-select interface="popover" placeholder="wifi" [(ngModel)]="this.miWifiIndex">
           <ion-option *ngFor="let wifi of this.listadoWifis; let i=index" [value] = "i" 
           (ionSelect)="seleccionaWifi(wifi)">{{wifi}}</ion-option>
       </ion-select>
@@ -25,7 +28,7 @@
   <div>
       <ion-item>
         <ion-label item-start>Eventos disponibles</ion-label>
-        <ion-select interface="popover" placeholder="evento">
+        <ion-select interface="popover" placeholder="evento" [(ngModel)]="this.miEventoIndex">
             <ion-option *ngFor="let evento of this.listadoEventos; let i=index" [value] = "i" 
             (ionSelect)="seleccionaEvento(i)">{{evento}}</ion-option>
         </ion-select>
@@ -39,5 +42,5 @@
     <p>Mostrar la hora</p>
   </div>
 
-  <button *ngIf="listadoEventos.length>0" type="submit" ion-button block>Fichar</button>
+  <button *ngIf="listadoEventos.length>0" type="submit" ion-button block (click)="botonFichar()">Fichar</button>
 </ion-content>

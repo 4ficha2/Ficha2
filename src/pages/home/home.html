@@ -13,20 +13,23 @@
     <img src="assets/imgs/Fichados.png">
   </div>
 
-  <ion-list>
-
     <ion-item>
       <ion-label stacked>Usuario</ion-label>
-      <ion-input type="text" [(ngModel)]="miLogin.login"></ion-input>
+      <ion-input type="text" #nombre="ngModel" name="nombre" [(ngModel)]="miLogin.login" required pattern=".{4,10}" ></ion-input>
     </ion-item>
+    <small [hidden]="nombre.valid || nombre.pristine">
+      Usuario de 4 a 10 caracteres
+    </small>
 
     <ion-item>
       <ion-label stacked>Contraseña</ion-label>
-      <ion-input type="password" [(ngModel)]="miLogin.pwd" required pattern=".{4,10}"></ion-input>
+      <ion-input type="password" #pwd="ngModel" name="pwd" [(ngModel)]="miLogin.pwd" required pattern=".{4,10}"></ion-input>
     </ion-item>
-
-  </ion-list>
-
-  <button ion-button color="secondary" block (click)="logIn()"> Entrar </button>
+    <small [hidden]="pwd.valid || pwd.pristine">
+      Contraseña de 4 a 10 caracteres
+    </small>
+  
+  <br><br>
+  <button [hidden]="!nombre.valid || !pwd.valid" ion-button color="secondary" block (click)="logIn()"> Entrar </button>
   <button ion-button color="danger" block menuToggle>Cancelar</button>
 </ion-content>
