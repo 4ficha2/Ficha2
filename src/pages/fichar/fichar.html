@@ -18,7 +18,7 @@
   <div>
     <ion-item>
       <ion-label item-start>Listado de wifispots</ion-label>
-      <ion-select interface="popover" placeholder="wifi">
+      <ion-select interface="popover" placeholder="wifi" [(ngModel)]="this.miWifiIndex">
           <ion-option *ngFor="let wifi of this.listadoWifis; let i=index" [value] = "i" 
           (ionSelect)="seleccionaWifi(wifi)">{{wifi}}</ion-option>
       </ion-select>
@@ -28,7 +28,7 @@
   <div>
       <ion-item>
         <ion-label item-start>Eventos disponibles</ion-label>
-        <ion-select interface="popover" placeholder="evento">
+        <ion-select interface="popover" placeholder="evento" [(ngModel)]="this.miEventoIndex">
             <ion-option *ngFor="let evento of this.listadoEventos; let i=index" [value] = "i" 
             (ionSelect)="seleccionaEvento(i)">{{evento}}</ion-option>
         </ion-select>

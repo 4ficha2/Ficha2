@@ -24,6 +24,47 @@ export class MiServidor {
     //Funciones y metodos del servicio
     //-----------------------------------------//
     
+    public solicitarFicharObservable(miLogin,miWifiName,miEvento): Observable<string> {
+    //Funcion Servidor emulado
+    //Revisa el cheeckIn del usuario en el evento, y confirma checkIn y el mensaje para el si lo hay
+    //Llama a la base de datos de usuarios (db.json en mi github)
+    //Actualiza el historico para incluir este nuevo registro (si es la primera vez)
+    //Devuelve un responseText (string) con el mensaje de bienvenida si lo hay en OK
+    //Devuelve un mensaje de KO si ya estaba registrado
+
+        let response=new Observable<string>((observer) => {
+            // observable execution
+            console.log("solicitarFicharObservable llamado");
+            //Pido al servidor el listado de usuarios registrados (get)
+            this.getUsersHttp().subscribe(
+                OK=>{                                           //Si no estaba aun registrado
+                    //Evaluo a nivel de servidor los datos
+                    //1. Localizo al usuario
+                    let usuario= OK.filter(usuario => usuario.userName == miLogin);
+                    //2. Localizo el evento
+                    let evento= usuario[0].eventList.filter(evento => evento.eventName==miEvento);
+                    //3. Reviso el estado de checkIn
+                    //TODO: falta revisar la hora para indicar si tarde o no.
+                    
+                    if (usuario.length==0 || evento.length==0 ) {
+                        observer.error("Usuario y evento no encontrados!!");
+                    } 
+                        else if (evento[0].checkIn) {           //Usuario ya registrado, repito el mensaje
+                            observer.error(evento[0].message);
+                        } 
+                            else {                            //Usuario registrado con exito, envio el mensaje
+                                observer.next(evento[0].message);
+                            }
+                },
+                KO=>{                                           //Si ya estaba registrado
+                    console.log("Respuesta enviarLogin: KO");
+                    observer.error("Error interno al fichar!!");     //Tambien le recuerdo el mensaje de bienvenida
+                }
+            );
+        });
+        return response;
+    }
+
     public solicitarEventosObservable (wifiNombre: string, usuario: string): Observable<[string]> {
     //Funcion Servidor emulado
     //Solicita todos los eventos asociados a un wifi disponibles para el usuario
