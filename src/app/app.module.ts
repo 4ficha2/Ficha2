@@ -14,6 +14,7 @@ import { Hotspot } from '@ionic-native/hotspot';
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { FicharPage } from '../pages/fichar/fichar';
+import { VarGlobal } from './MiVarGlobal.service';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { FicharPage } from '../pages/fichar/fichar';
     Hotspot,
     StatusBar,
     SplashScreen,
+    VarGlobal,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

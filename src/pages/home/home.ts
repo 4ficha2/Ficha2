@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Login } from '../../app/Ficha2.model';
 import { MiServidor } from '../../app/MiServidor.service';
 import { Storage } from '@ionic/storage';
+import { VarGlobal } from '../../app/MiVarGlobal.service';
 
 @Component({
   selector: 'page-home',
@@ -9,21 +10,25 @@ import { Storage } from '@ionic/storage';
   providers: [MiServidor]
 })
 
+//Variable global
+//declare var loginUsuario:string;
+
 export class HomePage {
 
   //Variables y atributos de este compoenente
   //----------------------------------------//
-  private miLogin: Login;
+  public miLogin: Login;
   private KEY: string="PublicKeyServidor";   //Clave publica del servidor 
 
   //Constructor e inicializacion del componente
   //-----------------------------------------//
   constructor(private storage: Storage,
-              private servicioServidor: MiServidor) {
+              private servicioServidor: MiServidor,
+              private miVarGlobal: VarGlobal) {
     //Inicializo los inputs
     this.miLogin= new Login;
-    this.miLogin.login="angel";   //Valores por defecto
-    this.miLogin.pwd="1234";    //Valor por defecto
+    //this.miLogin.login="angel";   //Valores por defecto
+    //this.miLogin.pwd="1234";    //Valor por defecto
   }
 
   //Funciones y metodos locales
@@ -56,7 +61,8 @@ export class HomePage {
         token: ""
       };
 
-      //3. CReo la misma logica de abajo pero con una funcion asyncrona (Observable)
+      //3. Llamo al servidor solicitando mi login (Observable)
+      //Almaceno el token y el usuario devuelto en el storage
       this.servicioServidor.enviarLoginObservable(objetoLogin).subscribe(
         OK=>{
             console.log("Respuesta enviarLoginObservable: OK");
@@ -66,8 +72,14 @@ export class HomePage {
       
             }else{
               console.log("Usario y password autenticados");
-              //Almaceno el token facilitado 
+              //Almaceno el token facilitado y el usuario
               this.storage.set("TOKEN", OK);
+              this.storage.set("LOGIN",objetoLogin.login)
+
+              //Actualizo la variable global usuario
+              this.miVarGlobal.setVarGlobal(objetoLogin.login);
+              console.log(this.miVarGlobal.globalAny);
+              
               //Salto a la pagina de FIchar !! (por fin dejo esta pagina !!)
               alert("Usario autenticado correctamente (token: "+OK+" )")
             }
@@ -79,24 +91,6 @@ export class HomePage {
             console.log("Respuesta enviarLoginObservable: complete()");
         }
       ); 
-
-
-      /* Esta llamada a enviar Login no es asyncrona y hace que mitoken sea undefined al evaluar
-      //3. Llamo al servicio del servidor solicitando mi autenticacion y token
-      let miToken = this.servicioServidor.enviarLogin(objetoLogin);
-      
-      //4. Compruebo si la autenticacion ha ido bien (token>0)
-      if (miToken<0){
-        console.log("Usario o password incorrecto");
-        alert ("Usario o password incorrecto");
-
-      }else{
-        console.log("Usario y password autenticados");
-        //Almaceno el token facilitado 
-        this.storage.set("TOKEN", miToken);
-        //Salto a la pagina de FIchar !! (por fin dejo esta pagina !!)
-      }*/
-
     });
   }
     
@@ -105,9 +99,11 @@ export class HomePage {
     let salida: string="";
 
     //Algoritmo de cifrado sencillo
-    key=="" ? salida=password:salida=password.toUpperCase();
-      console.log("Password cifrado: ");
-      console.log("pwd="+password+";KEY="+key+";pwdCiphered="+salida);
+    if (password.length>0){
+      key=="" ? salida=password:salida=password.toUpperCase();
+        console.log("Password cifrado: ");
+        console.log("pwd="+password+";KEY="+key+";pwdCiphered="+salida);
+    }
 
     return salida;
   }

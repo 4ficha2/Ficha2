@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, DateTime } from 'ionic-angular';
 import { MiServidor } from '../../app/MiServidor.service';
+import { HomePage } from '../home/home';
 
 @Component({
   selector: 'page-fichar',
   templateUrl: 'fichar.html',
-  providers: [MiServidor]
+  providers: [MiServidor,HomePage]
 })
 
 export class FicharPage {
@@ -13,12 +14,16 @@ export class FicharPage {
   private listadoWifis: Array<string>;      //Objeto de prueba para html
   private listadoEventos:Array<string>=["event1", "00", "01", "10"];  //Objeto de prueba para html
   private usuario: string;      //TODO: hay que almacenar globalmente el usuario
+  private myDate: Date; 
+
 
   constructor ( public navCtrl: NavController,
                 public servicioServidor: MiServidor, 
-                public navParams: NavParams) {
-    //this.listadoEventos=[];      //Si no hay eventos no se muestran el desplegable ni el boton
-    this.usuario="angel";          //Lo predefino para pruebas              
+                public navParams: NavParams,
+                public homeLogin: HomePage) {
+    //this.listadoEventos=[];                   //Si no hay eventos no se muestran el desplegable ni el boton
+    this.usuario="angel";                     //Lo predefino para pruebas              
+    //this.usuario=this.homeLogin.miLogin.login;
   }
 
   ionViewDidLoad() {
@@ -28,9 +33,19 @@ export class FicharPage {
   
   }
 
+  botonFichar(){
+  //Cuando se pulsa cojo la fecha y la hora y solicito el checkIn
+    //Fecha y hora
+    let fecha="21/06/2018";
+    let hora = "10:30:00";
+    
+    //solicito checkIn a servidor
+
+    
+  }
+
   seleccionaEvento(indice: number){
     console.log("Indice seleccionado: "+ indice);
-    //TODO: solicitar fichar !!
   }
 
   seleccionaWifi(opcion: string){
