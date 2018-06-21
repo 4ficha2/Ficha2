@@ -32,7 +32,7 @@ export class FicharPage {
   ionViewDidLoad() {
     console.log('Arranco el componente FicharPage');
     //Solicito el listado de wifi visibles
-    this.listadoWifis=["wifi1", "wifi2"];         //Listado de prueba
+    this.listadoWifis=["wifi1", "wifi2", "wifiKO"];         //Listado de prueba
  
     //Actualizo la hora
     let dt = new Date();
@@ -43,7 +43,11 @@ export class FicharPage {
     let dia = dt.getDate().toString();
     let horas = dt.getHours().toString();
     let minutos = dt.getMinutes().toString();
-    
+    minutos.length==1?minutos="0"+minutos:null;
+    horas.length==1?horas="0"+horas:null;
+    dia.length==1?dia="0"+dia:null;
+    mes.length==1?mes="0"+mes:null;
+
     this.myTime = horas + ":" + minutos + "  del  " + dia + "/" + mes + "/"+anio;
   
   }
