@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 
 import { Storage } from '@ionic/storage';
-import { Login, User } from "./Ficha2.model";
 import { Observable } from "rxjs/Observable";
 import { HttpClient } from "@angular/common/http";
+import { Login, User } from "./Ficha2.model";
 
 @Injectable()
 export class MiServidor {
@@ -12,54 +12,69 @@ export class MiServidor {
 
     //Variables y atributos locales al servicio
     //-----------------------------------------//
-    private miLogin: Login;
     static URL_SERVICIO_USERS: string = "https://my-json-server.typicode.com/acachon/myServer/users";
+    static URL_SERVICIO_EVENTOS: string = "https://my-json-server.typicode.com/acachon/myServer/wifiEventos";
     
     //Constructor e inicializacion del servicio
     //-----------------------------------------//
-
     constructor(public storage: Storage, 
                 public http : HttpClient){
-
-    //Pruebo a subscribirme a un observable creado por mi
-        /*     
-        this.observerToken.subscribe(
-        OK=>{
-            console.log("Respuesta enviarLogin: OK");
-            console.log(OK);
-        },
-        KO=>{
-            console.log("Respuesta enviarLogin: KO");
-            console.log(KO);
-        },
-        ()=>{
-            console.log("Respuesta enviarLogin: complete()");
-        }
-        );*/
-
-        //Pruebo con una funcion con observable y parametros
-        /*
-        this.mifuncionObservable(123).subscribe(
-            OK=>{
-                console.log("Respuesta enviarLogin: OK");
-                console.log(OK);
-            },
-            KO=>{
-                console.log("Respuesta enviarLogin: KO");
-                console.log(KO);
-            },
-            ()=>{
-                console.log("Respuesta enviarLogin: complete()");
-            }
-        );*/
-
     }
     
     //Funciones y metodos del servicio
     //-----------------------------------------//
+    public solicitarEventosObservable (wifiNombre: string, usuario: string): Observable<[string]> {
+    //Funcion Servidor emulado
+    //Solicita todos los eventos asociados a un wifi disponibles para el usuario
+    //Llama a la base de datos de wifiEventos (db.json en mi github)
+    //Busca el wifi y recopila los eventos donde el usuario esta registrado
+    //Devuelve un listado de eventos (Observable)
 
-    //Recreo la funcion enviarLogin como un observable
+        let misEventos=new Observable<[string]>((observer) => {
+            console.log("SolicitarEventosObservable llamado");
+            //Pido al servidor el listado de wifiEventos (get)
+            this.getEventosHttp().subscribe(
+                OK=>{
+                    console.log("Respuesta getEventosHttp: OK");
+                    //Selecciono el wifi y recopilo los eventos donde el usario esta
+                    let miWifi= OK.filter(wifi =>wifi.wifiName===wifiNombre);
+                    let miEventArray = miWifi[0].eventArray;
+                    let miLista1: [string]=[""];
+                    let numEventos=0;
+
+                    for (let j=0;j<miEventArray.length;j++){    //Recorro los eventos
+                        let k=0;
+                        while(miEventArray[j].users[k]!=usuario && k<miEventArray[j].users.length){    //Busco en los usuarios
+                            k++;
+                        }
+                        if (miEventArray[j].users[k]==usuario){
+                            miLista1[numEventos]=miEventArray[j].eventName;    //Incluyo el eventName si encontre al usuario
+                            numEventos++;
+                        }
+                    }
+                    console.log(miLista1);
+
+                    //Devuelvo el listado de Eventos disponibles para el usuario en ese wifi
+                    observer.next(miLista1); 
+                },
+                KO=>{
+                    console.log("Respuesta getEventosHttp: KO");
+                    //Este valor indica que no hay listado
+                    observer.next([null]);
+                }
+            );
+
+        });
+        return misEventos;
+    }
+
     public enviarLoginObservable (login: Login): Observable<number> {
+    //Funcion Servidor emulado
+    //Revisa si el login y el password coinciden con los registrados
+    //Llama a la base de datos de usuarios (db.json en mi github)
+    //Descifra el password y comprueba si existe login y password coincide
+    //Devuelve un token (Observable) que se genera en la DB
+
         let token=new Observable<number>((observer) => {
             // observable execution
             console.log("enviarLogin llamado");
@@ -83,29 +98,22 @@ export class MiServidor {
         return token;
     }
 
+    getEventosHttp (): Observable<[any]>{
+    //Servicio para recuperar de mi github la base de datos de wifiEventos
+        let listaEventos : Observable<[any]>;
 
-
-    public enviarLogin (login: Login): number{
-    //Envia al servidor la peticion para logarse
-    //Entrada: uri del servicio, objeto Login
-    //Salida: {response: string, token: number}
-        console.log("enviarLogin llamado");
-        let token: number;
+            listaEventos = this.http.get<[any]> (MiServidor.URL_SERVICIO_EVENTOS);
         
-        //Pido al servidor el listado de usuarios registrados (get)
-        this.getUsersHttp().subscribe(
-            OK=>{
-                console.log("Respuesta enviarLogin: OK");
-                //Compruebo si login y password son correctos y recupero el token
-                //Servicio de pseudoServidor
-                token = this.comprobarLogin(login,<[User]>OK); 
-            },
-            KO=>{
-                console.log("Respuesta enviarLogin: KO");
-                token=-1;   //Este valor indica que no hay token
-            }
-        );       
-        return token;
+        return listaEventos;
+    }
+
+    getUsersHttp (): Observable<[User]>{
+    //Servicio para recuperar de mi github la base de datos de usuarios
+        let listaUsuarios : Observable<[User]>;
+
+            listaUsuarios = this.http.get<[User]> (MiServidor.URL_SERVICIO_USERS);
+        
+        return listaUsuarios;
     }
 
     comprobarLogin (login: Login, listadoUsuarios: [User]): number{
@@ -135,28 +143,31 @@ export class MiServidor {
         return token;
     }
 
-    getUsersHttp (): Observable<[User]>{
-    //Servicio similar al anterior pero devulve un objeto Persona y no un array de Persona
-        let listaUsuarios : Observable<[User]>;
-
-            listaUsuarios = this.http.get<[User]> (MiServidor.URL_SERVICIO_USERS);
-        
-        return listaUsuarios;
-    }
-
     cifrarPassword(password: string, key: string): string{
-    //Cifra el password con la clave privada facilitada
-    //Servicio de pseudoServidor
-        let salida: string="";
-    
-        //Algoritmo de cifrado sencillo
-        key=="" ? salida=password:salida=password.toLowerCase();
-        console.log("Password descifrado: ");
+        //Cifra el password con la clave privada facilitada
+        //Servicio de pseudoServidor
+            let salida: string="";
         
-        return salida;
+            //Algoritmo de cifrado sencillo
+            key=="" ? salida=password:salida=password.toLowerCase();
+            console.log("Password descifrado: ");
+            
+            return salida;
     }
 
+}
 
+
+
+
+
+
+
+
+
+    //Codigo a reutilizar en otros caso, ejemplos y templates
+    //------------------------------------------------------//
+    
     /* Ejemplo de como devilver una promesa
     public itemsRefresh(): any { 
     //Recupera del storage el listado de canciones favoritas
@@ -203,4 +214,3 @@ export class MiServidor {
 
         return token;
     }*/
-}

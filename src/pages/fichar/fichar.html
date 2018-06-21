@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>Fichar</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <br>
+  <div class="avatar">
+    <img src="../../assets/imgs/Fichados.png" />
+  </div>
+  <div style="text-align: center;">Usuario</div>    <!-->Meter aqui el nombre del usuario<-->
+
+  <br><br>
+  <div>
+    <ion-item>
+      <ion-label item-start>Listado de wifispots</ion-label>
+      <ion-select interface="popover" placeholder="wifi">
+          <ion-option *ngFor="let wifi of this.listadoWifis; let i=index" [value] = "i" 
+          (ionSelect)="seleccionaWifi(wifi)">{{wifi}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </div>
+
+  <div>
+      <ion-item>
+        <ion-label item-start>Eventos disponibles</ion-label>
+        <ion-select interface="popover" placeholder="evento">
+            <ion-option *ngFor="let evento of this.listadoEventos; let i=index" [value] = "i" 
+            (ionSelect)="seleccionaEvento(i)">{{evento}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+  <div id="fecha">
+      <p>Mostrar la fecha</p>
+  </div>
+  <div id="hora">
+    <p>Mostrar la hora</p>
+  </div>
+
+  <button *ngIf="listadoEventos.length>0" type="submit" ion-button block>Fichar</button>
+</ion-content>
