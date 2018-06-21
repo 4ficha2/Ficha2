@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title text-center>Fichar</ion-title>
+    <ion-title >Fichar</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -37,9 +37,9 @@
     </div>
 
   <br><br><br><br>
-  <ion-item>
-    <ion-label>{{myTime}}</ion-label>
-  </ion-item>
+    <ion-item>
+      <ion-label>{{myTime}}</ion-label>
+    </ion-item>
 
   <button *ngIf="listadoEventos" type="submit" ion-button block (click)="botonFichar()">Fichar</button>
 </ion-content>

@@ -1,57 +1,53 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
 import { MiServidor } from './../../app/MiServidor.service';
-import { HistoricoService } from '../../app/historico.service';
-import { Historico } from '../../app/historico.model';
+import { Historico } from '../../app/Ficha2.model';
+import { VarGlobal } from '../../app/MiVarGlobal.service';
 
 
 @Component({
   selector: 'historico',
   templateUrl: 'historico.html',
-  providers: [HistoricoService, MiServidor]
+  providers: [MiServidor]
 
 })
 export class HistoricoPage {
 
   imagen: string;
   historico: Historico[];
-  usuario: string = "obdulia";    //TODO: incluir la variable del usuario global
+  usuario: string; 
 
   ngOnInit() {
-    this.buscarFechas();
+    //Actualizo el historico si hay un usuario logado
+    this.usuario?this.buscarFechas():null;
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private historico_service: HistoricoService, /*historico_service: MiServidor*/) {
+  constructor(private servicioServidor: MiServidor,
+              private miVarGlobal: VarGlobal){
+
     this.imagen = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEfuU8v4pn3n3fR6NLRxBJ2yganPzoFx9hl7iwqx6DC1plU9-Z"; // imagen del alumno (¿poner enlace en el json?)
+    this.usuario=this.miVarGlobal.globalAny;
+    //this.usuario="angel";     //Hard-coded para pruebas
   }
 
   buscarFechas() {
-    this.historico_service.buscaFechasHttp().subscribe
-      (jsonrecibido => this.obtenerFechas(jsonrecibido));
-
-    /*
-    this.historico_service.getUsersHttp().subscribe(
-    ok => {this.obtenerFechas(ok);},
-    ko => {console.log("Respuesta enviarLogin: KO");}
-    )
-    */
+  //Llamando al nuevo servicio de Jose
+  //  this.historico_service.buscaFechasHttp().subscribe
+  //    (jsonrecibido => this.obtenerFechas(jsonrecibido));
+  //Lamando al servicio ya existente
+    this.servicioServidor.getUsersHttp().subscribe
+    (jsonrecibido => this.obtenerFechas(jsonrecibido));
   }
 
   obtenerFechas(jsonrecibido: any) {
     let primera_pos = jsonrecibido[0];
-    console.log("primera_pos.userID " + primera_pos.userID);
+      console.log("primera_pos.userID " + primera_pos.userID);
     let aux = jsonrecibido.filter(x => x.userName == this.usuario);
     let aux_user = aux[0].userID; // aunque solo me devuelva un usuario me devuelve un array con un solo elemento.
     this.historico = <Historico[]>jsonrecibido[aux_user].history;// En el 0 habría que poner el ID del alumno;*/
   }
-
+  
+  tarjetaClick(){
+    console.log("Click!!");
+  }
 }
-/*
-obtenerFechas(jsonrecibido : any){
-  console.log(<Historico[]>jsonrecibido);
-  let aux = jsonrecibido.filter(x=>x.userName==this.usuario);
-
-  this.aux = <Historico[]> aux.UserID;
-  console.log(this.historico);
-}*/
 

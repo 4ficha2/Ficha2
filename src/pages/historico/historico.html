@@ -3,28 +3,30 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Histórico</ion-title>
-    
+    <ion-title >Histórico</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <div id= "avatar">
-      <img width="80px" src="{{imagen}}">
+      <img *ngIf="!this.usuario" width="80px" src="{{imagen}}">
+      <img *ngIf="this.usuario" width="150px"  src="../../assets/imgs/acachonAvatar.png" />
+      <ion-textarea [(ngModel)]="this.usuario" readonly style="text-align-last: center;" ></ion-textarea>
+      <ion-textarea *ngIf="!this.usuario" readonly style="text-align-last: center;" >No hay sesión iniciada</ion-textarea>
   </div>
 
   <div *ngIf="historico">
     <div *ngFor="let fecha of historico">
       <ion-card class="azul">
-        <ion-card-title text-center class="azul  texto_blanco">
+        <ion-card-title text-center class="azul texto_blanco" >
           {{fecha.date}}
         </ion-card-title>
         <ion-card-content>
-          {{fecha.eventID}}
+          <b>Evento:&nbsp;&nbsp;&nbsp;&nbsp;</b> {{fecha.eventName}}
           <br>
-          {{fecha.status}}
+          <b>Estado:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>{{fecha.status}}
           <br>
-          {{fecha.comments}}
+          <b>Mensaje:&nbsp;&nbsp;</b>{{fecha.comments}}
         </ion-card-content>
       </ion-card>
     </div>

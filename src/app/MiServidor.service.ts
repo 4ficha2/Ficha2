@@ -91,7 +91,7 @@ export class MiServidor {
                             while(miEventArray[j].users[k]!=usuario && k<miEventArray[j].users.length){    //Busco en los usuarios
                                 k++;
                             }
-                            if (miEventArray[j].users[k-1]==usuario){
+                            if (miEventArray[j].users[k]==usuario && usuario){
                                 miLista1[numEventos]=miEventArray[j].eventName;    //Incluyo el eventName si encontre al usuario
                                 numEventos++;
                             }
