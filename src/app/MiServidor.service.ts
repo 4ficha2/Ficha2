@@ -39,9 +39,9 @@ export class MiServidor {
                     console.log("Respuesta getEventosHttp: OK");
                     //Selecciono el wifi y recopilo los eventos donde el usario esta
                     let miWifi= OK.filter(wifi =>wifi.wifiName===wifiNombre);
-                    let miEventArray = miWifi[0].eventArray;
-                    let miLista1: [string]=[""];
+                    let miEventArray = miWifi[0].eventArray;      
                     let numEventos=0;
+                    let miLista1: [string]=[""];
 
                     for (let j=0;j<miEventArray.length;j++){    //Recorro los eventos
                         let k=0;
@@ -53,6 +53,8 @@ export class MiServidor {
                             numEventos++;
                         }
                     }
+                    //Vacio miLista si no hay eventos (hago esto porque si inicializo a [] funciona pero VSCode lo pone rojo!!)
+                    numEventos==0?miLista1.pop():null;
                     console.log(miLista1);
 
                     //Devuelvo el listado de Eventos disponibles para el usuario en ese wifi

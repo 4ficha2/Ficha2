@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, DateTime } from 'ionic-angular';
 import { MiServidor } from '../../app/MiServidor.service';
-import { HomePage } from '../home/home';
+//import { HomePage } from '../home/home';
+import { VarGlobal } from '../../app/MiVarGlobal.service';
 
 @Component({
   selector: 'page-fichar',
   templateUrl: 'fichar.html',
-  providers: [MiServidor,HomePage]
+  providers: [MiServidor]
 })
 
 export class FicharPage {
@@ -20,10 +21,14 @@ export class FicharPage {
   constructor ( public navCtrl: NavController,
                 public servicioServidor: MiServidor, 
                 public navParams: NavParams,
-                public homeLogin: HomePage) {
+                //public homeLogin: HomePage,
+                private miVarGlobal: VarGlobal) {
+
     //this.listadoEventos=[];                   //Si no hay eventos no se muestran el desplegable ni el boton
-    this.usuario="angel";                     //Lo predefino para pruebas              
-    //this.usuario=this.homeLogin.miLogin.login;
+    this.usuario=this.miVarGlobal.globalAny;
+    
+    //Consulto la variable global
+    console.log("globalAny: " + this.miVarGlobal.globalAny);
   }
 
   ionViewDidLoad() {

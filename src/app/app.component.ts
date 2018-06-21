@@ -15,7 +15,7 @@ import { FicharPage } from '../pages/fichar/fichar';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = FicharPage;
 
   pages: Array<{title: string, component: any}>;
 

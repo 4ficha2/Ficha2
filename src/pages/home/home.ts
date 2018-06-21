@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+
 import { Login } from '../../app/Ficha2.model';
 import { MiServidor } from '../../app/MiServidor.service';
 import { Storage } from '@ionic/storage';
 import { VarGlobal } from '../../app/MiVarGlobal.service';
+import { FicharPage } from '../fichar/fichar';
+
 
 @Component({
   selector: 'page-home',
@@ -21,6 +25,7 @@ export class HomePage {
   //-----------------------------------------//
   constructor(private storage: Storage,
               private servicioServidor: MiServidor,
+              private navCtrl: NavController,
               private miVarGlobal: VarGlobal) {
     //Inicializo los inputs
     this.miLogin= new Login;
@@ -75,10 +80,11 @@ export class HomePage {
 
               //Actualizo la variable global usuario
               this.miVarGlobal.setVarGlobal(objetoLogin.login);
-              console.log(this.miVarGlobal.globalAny);
+              console.log("Login (miVarGlobal): " + this.miVarGlobal.globalAny);
               
-              //Salto a la pagina de FIchar !! (por fin dejo esta pagina !!)
-              alert("Usario autenticado correctamente (token: "+OK+" )")
+              //Salto a la pagina de Fichar !! (por fin dejo esta pagina !!)
+              this.navCtrl.setRoot(FicharPage);
+              console.log("Usario autenticado correctamente (token: "+OK+" )");
             }
         },
         KO=>{
