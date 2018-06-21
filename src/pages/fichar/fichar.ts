@@ -30,6 +30,7 @@ export class FicharPage {
 
   seleccionaEvento(indice: number){
     console.log("Indice seleccionado: "+ indice);
+    //TODO: solicitar fichar !!
   }
 
   seleccionaWifi(opcion: string){

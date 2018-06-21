@@ -23,6 +23,7 @@ export class MiServidor {
     
     //Funciones y metodos del servicio
     //-----------------------------------------//
+    
     public solicitarEventosObservable (wifiNombre: string, usuario: string): Observable<[string]> {
     //Funcion Servidor emulado
     //Solicita todos los eventos asociados a un wifi disponibles para el usuario
