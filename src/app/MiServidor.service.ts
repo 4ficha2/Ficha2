@@ -40,9 +40,9 @@ export class MiServidor {
                 OK=>{                                           //Si no estaba aun registrado
                     //Evaluo a nivel de servidor los datos
                     //1. Localizo al usuario
-                    let usuario= OK.filter(usuario => usuario.userName == miLogin);
+                    let usuario: any = OK.filter(usuario => usuario.userName == miLogin);
                     //2. Localizo el evento
-                    let evento= usuario[0].eventList.filter(evento => evento.eventName==miEvento);
+                    let evento : any = usuario[0].eventList.filter((x: any ) => x.eventName==miEvento);
                     //3. Reviso el estado de checkIn
                     //TODO: falta revisar la hora para indicar si tarde o no.
                     
@@ -80,26 +80,33 @@ export class MiServidor {
                     console.log("Respuesta getEventosHttp: OK");
                     //Selecciono el wifi y recopilo los eventos donde el usario esta
                     let miWifi= OK.filter(wifi =>wifi.wifiName===wifiNombre);
-                    let miEventArray = miWifi[0].eventArray;      
-                    let numEventos=0;
-                    let miLista1: [string]=[""];
 
-                    for (let j=0;j<miEventArray.length;j++){    //Recorro los eventos
-                        let k=0;
-                        while(miEventArray[j].users[k]!=usuario && k<miEventArray[j].users.length){    //Busco en los usuarios
-                            k++;
-                        }
-                        if (miEventArray[j].users[k]==usuario){
-                            miLista1[numEventos]=miEventArray[j].eventName;    //Incluyo el eventName si encontre al usuario
-                            numEventos++;
-                        }
-                    }
-                    //Vacio miLista si no hay eventos (hago esto porque si inicializo a [] funciona pero VSCode lo pone rojo!!)
-                    numEventos==0?miLista1.pop():null;
-                    console.log(miLista1);
+                    if (miWifi.length>0){
+                        let miEventArray = miWifi[0].eventArray;      
+                        let numEventos=0;
+                        let miLista1: [string]=[""];
 
-                    //Devuelvo el listado de Eventos disponibles para el usuario en ese wifi
-                    observer.next(miLista1); 
+                        for (let j=0;j<miEventArray.length;j++){    //Recorro los eventos
+                            let k=0;
+                            while(miEventArray[j].users[k]!=usuario && k<miEventArray[j].users.length){    //Busco en los usuarios
+                                k++;
+                            }
+                            if (miEventArray[j].users[k]==usuario && usuario){
+                                miLista1[numEventos]=miEventArray[j].eventName;    //Incluyo el eventName si encontre al usuario
+                                numEventos++;
+                            }
+                        }
+                        //Vacio miLista si no hay eventos (hago esto porque si inicializo a [] funciona pero VSCode lo pone rojo!!)
+                        //Devuelvo OK si hay eventos para el usuario y si no devulevo un KO y una lista vacia
+                        if (numEventos>0){
+                            observer.next(miLista1);
+                        }else{
+                            observer.error(miLista1.pop());
+                        }
+
+                    } else {    //Wifi no encontrado
+                        observer.error(["Ningun evento en este wifi"]); 
+                    } 
                 },
                 KO=>{
                     console.log("Respuesta getEventosHttp: KO");
