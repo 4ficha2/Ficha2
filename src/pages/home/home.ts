@@ -10,9 +10,6 @@ import { VarGlobal } from '../../app/MiVarGlobal.service';
   providers: [MiServidor]
 })
 
-//Variable global
-//declare var loginUsuario:string;
-
 export class HomePage {
 
   //Variables y atributos de este compoenente

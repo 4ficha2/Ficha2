@@ -18,8 +18,11 @@
 
     <ion-item>
       <ion-label stacked>Usuario</ion-label>
-      <ion-input type="text" [(ngModel)]="miLogin.login" required pattern=".{4,10}" ></ion-input>
+      <ion-input type="text" #nombre="ngModel" name="nombre" [(ngModel)]="miLogin.login" required pattern=".{4,10}" ></ion-input>
     </ion-item>
+    <small [hidden]="nombre.valid"> <!-- Si la condicion es true, se oculta-->
+      Usuario de 4 a 10 caracteres
+    </small>
 
     <ion-item>
       <ion-label stacked>Contraseña</ion-label>
