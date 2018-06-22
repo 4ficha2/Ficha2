@@ -10,13 +10,12 @@ export class wifiComponent {
   [x: string]: any;
 
   private networksString: Array<string>=["Actualiza pantalla!!"];
-  private networksWifi: Array<HotspotNetwork>;
+  //private networksWifi: Array<HotspotNetwork>;
   
   constructor(private hotspot: Hotspot) { 
-    
-    //Uso el nuevo servicio
-    //Este servicio no funciona en emulador web (ionic serve) pues requiere Cordova
-    //Cordova facilita el wifi, y si corre en emulador web no va
+  //Uso el nuevo servicio
+  //Este servicio no funciona en emulador web (ionic serve) pues requiere Cordova
+  //Cordova facilita el wifi, y si corre en emulador web no va
     
     //Compruebo si esta activo el wifi
     this.hotspot.isAvailable().then((flag: boolean) =>
@@ -43,10 +42,6 @@ export class wifiComponent {
         }
       }  
     );
-    
-    //alert("Estado wifi: ");
-
-
   }
 
   private buscarWifi(): void {

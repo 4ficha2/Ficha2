@@ -64,7 +64,7 @@ export class HistoricoPage {
       attachments: [],
 
       subject: 'Justificante día ' + fecha.date + '. Curso: ' + fecha.eventName,
-      body: '[No olvides insertar como archivo adjunto tu justificante!!]\\br',
+      body: '[No olvides insertar como archivo adjunto tu justificante!!]'+"\n",
       isHtml: true
     });
   }
