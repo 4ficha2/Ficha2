@@ -17,7 +17,8 @@ export class FicharPage {
   private miEventoIndex: number;     //Evento seleccionado
   private usuario: string;      //TODO: hay que almacenar globalmente el usuario
   private myDate: Date;
-  private myTime: string; 
+  private myTime: string;
+  private miAvatar: string;     //ruta del avatar del usuario 
   
 
 
@@ -26,7 +27,8 @@ export class FicharPage {
                 public navParams: NavParams,
                 //public homeLogin: HomePage,
                 private miVarGlobal: VarGlobal) {
-    this.usuario=this.miVarGlobal.globalAny;
+    this.usuario=this.miVarGlobal.globalAny;      //Usuario
+    this.miAvatar=this.miVarGlobal.avatar;        //Avatar
   }
 
   ionViewDidLoad() {

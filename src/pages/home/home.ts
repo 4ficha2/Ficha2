@@ -60,7 +60,8 @@ export class HomePage {
         login: this.miLogin.login,
         pwd: "",      
         pwdCipher: passwordCiphered,
-        token: ""
+        token: "",
+        avatar: ""
       };
 
       //3. Llamo al servidor solicitando mi login (Observable)
@@ -68,23 +69,28 @@ export class HomePage {
       this.servicioServidor.enviarLoginObservable(objetoLogin).subscribe(
         OK=>{
             console.log("Respuesta enviarLoginObservable: OK");
-            if (OK<0){
+            if (OK[0]<0){
               console.log("Usario o password incorrecto");
               alert ("Usario o password incorrecto");
       
             }else{
               console.log("Usario y password autenticados");
               //Almaceno el token facilitado y el usuario
-              this.storage.set("TOKEN", OK);
+              this.storage.set("TOKEN", OK[0]);
               this.storage.set("LOGIN",objetoLogin.login)
 
               //Actualizo la variable global usuario
               this.miVarGlobal.setVarGlobal(objetoLogin.login);
               console.log("Login (miVarGlobal): " + this.miVarGlobal.globalAny);
               
+              //Actualizo la variable global avaatar
+              this.miVarGlobal.setAvatar(OK[1]);
+              console.log("Avatar (miVarGlobal): " + this.miVarGlobal.avatar);
+              
+
               //Salto a la pagina de Fichar !! (por fin dejo esta pagina !!)
               this.navCtrl.setRoot(FicharPage);
-              console.log("Usario autenticado correctamente (token: "+OK+" )");
+              console.log("Usario autenticado correctamente (token: "+OK[0]+" )");
             }
         },
         KO=>{
