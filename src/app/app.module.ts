@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FicharPage } from '../pages/fichar/fichar';
 import { VarGlobal } from './MiVarGlobal.service';
 import { HistoricoPage } from '../pages/historico/historico';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { HistoricoPage } from '../pages/historico/historico';
     StatusBar,
     SplashScreen,
     VarGlobal,
+    EmailComposer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
