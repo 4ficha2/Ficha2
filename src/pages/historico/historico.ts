@@ -14,7 +14,8 @@ export class HistoricoPage {
 
   imagen: string;
   historico: Historico[];
-  usuario: string; 
+  usuario: string;
+  private miAvatar: string;     //ruta del avatar del usuario  
 
   ngOnInit() {
     //Actualizo el historico si hay un usuario logado
@@ -26,7 +27,7 @@ export class HistoricoPage {
 
     this.imagen = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEfuU8v4pn3n3fR6NLRxBJ2yganPzoFx9hl7iwqx6DC1plU9-Z"; // imagen del alumno (¿poner enlace en el json?)
     this.usuario=this.miVarGlobal.globalAny;
-    //this.usuario="angel";     //Hard-coded para pruebas
+    this.miAvatar=this.miVarGlobal.avatar;        //Avatar
   }
 
   buscarFechas() {

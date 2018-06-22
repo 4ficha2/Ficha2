@@ -34,7 +34,7 @@ export class FicharPage {
   ionViewDidLoad() {
     console.log('Arranco el componente FicharPage');
     //Solicito el listado de wifi visibles
-    this.listadoWifis=["wifi1", "wifi2", "wifiKO"];         //Listado de prueba
+    this.listadoWifis=["wifi1", "wifi2", "wifiKO", "GET12-06"];         //Listado de prueba
  
     //Actualizo la hora
     let dt = new Date();
