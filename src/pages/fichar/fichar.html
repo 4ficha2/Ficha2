@@ -11,7 +11,7 @@
   <br>
   <div class="avatar">
     <img *ngIf="!this.usuario" src="../../assets/imgs/Fichados.png" />
-    <img *ngIf="this.usuario" src="../../assets/imgs/acachonAvatar.png" />
+    <img *ngIf="this.usuario" src={{this.miAvatar}} />  <!--src="../../assets/imgs/acachonAvatar.png"-->
     <ion-textarea readonly style="text-align-last: center;" [(ngModel)]="this.usuario"></ion-textarea>
   </div>
 

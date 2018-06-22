@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, DateTime } from 'ionic-angular';
 import { MiServidor } from '../../app/MiServidor.service';
 import { VarGlobal } from '../../app/MiVarGlobal.service';
+import { Hotspot } from '@ionic-native/hotspot';
+import { HotspotNetwork } from '@ionic-native/hotspot';
 
 @Component({
   selector: 'page-fichar',
@@ -11,28 +13,33 @@ import { VarGlobal } from '../../app/MiVarGlobal.service';
 
 export class FicharPage {
 
-  private listadoWifis: Array<string>;      //Objeto de prueba para html
+  private listadoWifis: Array<string>=["GET12-06"];      //Objeto de prueba para html
   private listadoEventos:Array<string>;     //Objeto de prueba para html
   private miWifiIndex: number;       //wifi seleccionado
   private miEventoIndex: number;     //Evento seleccionado
   private usuario: string;      //TODO: hay que almacenar globalmente el usuario
   private myDate: Date;
-  private myTime: string; 
+  private myTime: string;
+  private miAvatar: string;     //ruta del avatar del usuario
+  private networksString: Array<string>=["Actualiza pantalla!!"]; 
   
 
 
   constructor ( public navCtrl: NavController,
                 public servicioServidor: MiServidor, 
                 public navParams: NavParams,
-                //public homeLogin: HomePage,
+                private hotspot: Hotspot,
                 private miVarGlobal: VarGlobal) {
-    this.usuario=this.miVarGlobal.globalAny;
+
+    this.usuario=this.miVarGlobal.globalAny;      //Usuario
+    this.miAvatar=this.miVarGlobal.avatar;        //Avatar
+    this.buscarWifi();                            //Actualizo los wifi
   }
 
   ionViewDidLoad() {
     console.log('Arranco el componente FicharPage');
     //Solicito el listado de wifi visibles
-    this.listadoWifis=["wifi1", "wifi2", "wifiKO"];         //Listado de prueba
+    //this.listadoWifis=["wifi1", "wifi2", "wifiKO", "GET12-06"];         //Listado de prueba
  
     //Actualizo la hora
     let dt = new Date();
@@ -112,6 +119,22 @@ export class FicharPage {
       },
       ()=>{
           console.log("Respuesta solicitarEventosObservable: complete()");
+      }
+    );
+  }
+
+  private buscarWifi(): void {
+  //Busco el listado de redes wifi visibles y actualizo el atributo global networksString[]
+  //Llamo a esta funcion cuando he comprobado que wifi esta on para mejorar estabilidad
+    this.hotspot.scanWifi().then(
+      (networks: Array<HotspotNetwork>) => 
+      {
+        //alert("Listado redes wifi actualizado");
+        //Actualizo la variable global donde lo almaceno
+        for (let i=0; i<networks.length;i=i+1){
+          this.networksString[i]=networks[i].SSID;  //Esta ya no hace falta
+          this.listadoWifis[i]=networks[i].SSID;
+        }
       }
     );
   }

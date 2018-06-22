@@ -15,8 +15,7 @@ export class HistoricoPage {
 
   imagen: string;
   historico: Historico[];
-  usuario: string;
-  private miAvatar: string;     //ruta del avatar del usuario  
+  usuario: string; 
 
   ngOnInit() {
     //Actualizo el historico si hay un usuario logado
@@ -29,7 +28,7 @@ export class HistoricoPage {
 
     this.imagen = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEfuU8v4pn3n3fR6NLRxBJ2yganPzoFx9hl7iwqx6DC1plU9-Z"; // imagen del alumno (¿poner enlace en el json?)
     this.usuario=this.miVarGlobal.globalAny;
-    this.miAvatar=this.miVarGlobal.avatar;        //Avatar
+    //this.usuario="angel";     //Hard-coded para pruebas
   }
 
   buscarFechas() {
@@ -48,23 +47,17 @@ export class HistoricoPage {
     let aux_user = aux[0].userID; // aunque solo me devuelva un usuario me devuelve un array con un solo elemento.
     this.historico = <Historico[]>jsonrecibido[aux_user].history;// En el 0 habría que poner el ID del alumno;*/
   }
-  
-  tarjetaClick(){
-    console.log("Click!!");
-  }
 
-  enviarCorreo(fecha){
-  //Manda un justificante al profesor con el justificante
-    console.log('Justificante día ' + fecha.date + " " + fecha.eventName);
-    //mando el correo preformateado
+  enviarCorreo(dia) {
+    console.log('Justificante día ' + dia.date + dia.eventName);
     this.emailComposer.open({
       to: '4ficha2@gmail.com',
       cc: [],
       bcc: [],
       attachments: [],
 
-      subject: 'Justificante día ' + fecha.date + '. Curso: ' + fecha.eventName,
-      body: '[No olvides insertar como archivo adjunto tu justificante!!]'+"\n",
+      subject: 'Justificante día ' + dia.date + '. Curso: ' + dia.eventName,
+      body: 'No olvides insertar el archivo adjunto',
       isHtml: true
     });
   }

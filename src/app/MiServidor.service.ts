@@ -119,14 +119,14 @@ export class MiServidor {
         return misEventos;
     }
 
-    public enviarLoginObservable (login: Login): Observable<number> {
+    public enviarLoginObservable (login: Login): Observable<any> {
     //Funcion Servidor emulado
     //Revisa si el login y el password coinciden con los registrados
     //Llama a la base de datos de usuarios (db.json en mi github)
     //Descifra el password y comprueba si existe login y password coincide
     //Devuelve un token (Observable) que se genera en la DB
 
-        let token=new Observable<number>((observer) => {
+        let salida=new Observable<any>((observer) => {
             // observable execution
             console.log("enviarLogin llamado");
             //Pido al servidor el listado de usuarios registrados (get)
@@ -141,12 +141,13 @@ export class MiServidor {
                 KO=>{
                     console.log("Respuesta enviarLogin: KO");
                     //token=-1;   //Este valor indica que no hay token
-                    observer.next(-1);
+                    let fallo: [any]=[-1];
+                    observer.next(fallo);
                 }
             );
 
         });
-        return token;
+        return salida;
     }
 
     getEventosHttp (): Observable<[any]>{
@@ -167,10 +168,13 @@ export class MiServidor {
         return listaUsuarios;
     }
 
-    comprobarLogin (login: Login, listadoUsuarios: [User]): number{
+    comprobarLogin (login: Login, listadoUsuarios: [User]): any{
     //Comprueba si el login y password corresponde con listadoUsers
     //Servicio de pseudoServidor
         let token: number;
+        let avatar: string="";
+        let salida: any=["",""];        //Compone el token y el avatar
+
             //Descrifro el password
             let password = this.cifrarPassword(login.pwdCipher,"PrivateKeyServidor");
             let usuario = login.login; 
@@ -189,9 +193,12 @@ export class MiServidor {
                 else{
                     console.log("Usuario autentificado");
                     token=usuarioEncontrado.token;
+                    avatar=usuarioEncontrado.avatar;
                 }
             }
-        return token;
+            salida[0]=token;
+            salida[1]=avatar;
+        return salida;
     }
 
     cifrarPassword(password: string, key: string): string{
