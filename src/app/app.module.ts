@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
-import { wifiComponent } from '../pages/wifi/wifi';
+//import { wifiComponent } from '../pages/wifi/wifi';
 
 import { Hotspot } from '@ionic-native/hotspot';
 import { IonicStorageModule } from '@ionic/storage';
@@ -22,7 +22,7 @@ import { EmailComposer } from '@ionic-native/email-composer';
     HomePage,
     FicharPage,
     HistoricoPage,
-    wifiComponent,
+    //wifiComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +36,7 @@ import { EmailComposer } from '@ionic-native/email-composer';
     HomePage,
     FicharPage,
     HistoricoPage,
-    wifiComponent,
+    //wifiComponent,
   ],
   providers: [
     Hotspot,

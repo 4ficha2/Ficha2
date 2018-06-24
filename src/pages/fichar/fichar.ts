@@ -4,6 +4,7 @@ import { MiServidor } from '../../app/MiServidor.service';
 import { VarGlobal } from '../../app/MiVarGlobal.service';
 import { Hotspot } from '@ionic-native/hotspot';
 import { HotspotNetwork } from '@ionic-native/hotspot';
+import { ReturnStatement } from '@angular/compiler';
 
 @Component({
   selector: 'page-fichar',
@@ -21,7 +22,9 @@ export class FicharPage {
   private myDate: Date;
   private myTime: string;
   private miAvatar: string;     //ruta del avatar del usuario
-  private networksString: Array<string>=["Actualiza pantalla!!"]; 
+  private networksString: Array<string>=["Actualiza pantalla!!"];
+  private mensajeEvento: string;
+  private nombreEvento: string="Mensaje del curso "; 
   
 
 
@@ -33,13 +36,13 @@ export class FicharPage {
 
     this.usuario=this.miVarGlobal.globalAny;      //Usuario
     this.miAvatar=this.miVarGlobal.avatar;        //Avatar
-    this.buscarWifi();                            //Actualizo los wifi
+    //this.usuario?this.buscarWifi():null;          //Bloqueo la actualizacion real de wifi para depurar en web
   }
 
   ionViewDidLoad() {
     console.log('Arranco el componente FicharPage');
     //Solicito el listado de wifi visibles
-    //this.listadoWifis=["wifi1", "wifi2", "wifiKO", "GET12-06"];         //Listado de prueba
+    this.listadoWifis=["wifi1", "wifi2", "wifiKO", "GET12-06"];         //Listado de prueba
  
     //Actualizo la hora
     let dt = new Date();
@@ -81,15 +84,15 @@ export class FicharPage {
           console.log(OK);
           //Mostrar mensaje bienvenida
           alert("Gracias por registrarte")
-          alert("Mensaje: " +OK);
-          //TODO: ir a sigiuente componente ... cual ??
-
+          this.mensajeEvento=OK;
+          this.nombreEvento="Mensaje del curso " + miEvento;
       },
       KO=>{
           console.log("Respuesta solicitarEventosObservable: KO");
           //Recordar mensaje bienvenida
           alert("Ya estabas registrado")
-          alert("Mensaje: " + KO);
+          this.mensajeEvento=KO;
+          this.nombreEvento="Mensaje del curso " + miEvento;
       },
       ()=>{
           console.log("Respuesta solicitarEventosObservable: complete()");

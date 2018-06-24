@@ -10,15 +10,16 @@
 <ion-content padding>
   <br>
   <div class="avatar">
-    <img *ngIf="!this.usuario" src="../../assets/imgs/logoF2.png" />
+    <img *ngIf="!this.usuario" src="assets/imgs/logoF2.png" />
+    <ion-textarea *ngIf="!this.usuario" value="Usuario no registrado" readonly style="text-align-last: center;" ></ion-textarea>
     <img *ngIf="this.usuario" src={{this.miAvatar}} />  <!--src="../../assets/imgs/acachonAvatar.png"-->
     <ion-textarea readonly style="text-align-last: center;" [(ngModel)]="this.usuario"></ion-textarea>
   </div>
 
-  <br><br>
+  <br>
   <div>
     <ion-item>
-      <ion-label item-start>Listado de wifispots</ion-label>
+      <ion-label color="primary" item-start>Listado de wifispots</ion-label>
       <ion-select interface="popover" placeholder="wifi" [(ngModel)]="this.miWifiIndex">
           <ion-option *ngFor="let wifi of this.listadoWifis; let i=index" [value] = "i" 
           (ionSelect)="seleccionaWifi(wifi)">{{wifi}}</ion-option>
@@ -28,7 +29,7 @@
 
   <div>
       <ion-item>
-        <ion-label item-start>Eventos disponibles</ion-label>
+        <ion-label color="primary" item-start>Eventos disponibles</ion-label>
         <ion-select interface="popover" placeholder="evento" [(ngModel)]="this.miEventoIndex">
             <ion-option *ngFor="let evento of this.listadoEventos; let i=index" [value] = "i" 
             (ionSelect)="seleccionaEvento(i)">{{evento}}</ion-option>
@@ -36,10 +37,19 @@
       </ion-item>
     </div>
 
-  <br><br><br><br>
+  <br>
     <ion-item>
-      <ion-label>{{myTime}}</ion-label>
+      <ion-label style="text-align-last: center;">{{myTime}}</ion-label>
     </ion-item>
 
-  <button *ngIf="listadoEventos" type="submit" ion-button block (click)="botonFichar()">Fichar</button>
+    <button *ngIf="listadoEventos" type="submit" ion-button block (click)="botonFichar()">Fichar</button>
+
+  <br><br>
+  <ion-item>
+    <ion-label color="primary" stacked >{{this.nombreEvento}} </ion-label>
+      <ion-input readonly type="text" [(ngModel)]="this.mensajeEvento" placeholder="Selecciona un evento primero y Ficha!!"></ion-input>
+    </ion-item>
+
+
+
 </ion-content>

@@ -4,7 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { wifiComponent } from '../pages/wifi/wifi';
+//import { wifiComponent } from '../pages/wifi/wifi';
 import { FicharPage } from '../pages/fichar/fichar';
 import { HistoricoPage } from '../pages/historico/historico';
 
@@ -28,7 +28,7 @@ export class MyApp {
       { title: 'Login', component: HomePage },
       { title: 'Fichar', component: FicharPage },
       { title: 'Historico', component: HistoricoPage },
-      { title: 'Listado wifi', component: wifiComponent },
+      //{ title: 'Listado wifi', component: wifiComponent },
     ];
 
   }
