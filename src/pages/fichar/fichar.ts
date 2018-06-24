@@ -36,13 +36,13 @@ export class FicharPage {
 
     this.usuario=this.miVarGlobal.globalAny;      //Usuario
     this.miAvatar=this.miVarGlobal.avatar;        //Avatar
-    //this.usuario?this.buscarWifi():null;          //Bloqueo la actualizacion real de wifi para depurar en web
+    this.usuario?this.buscarWifi():null;          
   }
 
   ionViewDidLoad() {
-    console.log('Arranco el componente FicharPage');
+    console.log('Arranco el componente \nFicharPage');
     //Solicito el listado de wifi visibles
-    this.listadoWifis=["wifi1", "wifi2", "wifiKO", "GET12-06"];         //Listado de prueba
+    //this.listadoWifis=["Homewifi", "wifi1", "wifi2", "wifiKO", "GET12-06"];         //Listado de prueba
  
     //Actualizo la hora
     let dt = new Date();
