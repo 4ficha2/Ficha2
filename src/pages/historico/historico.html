@@ -9,11 +9,21 @@
 
 <ion-content>
   <div id= "avatar">
-      <img *ngIf="!this.usuario" src="assets/imgs/logoF2.png">
+      <img *ngIf="!this.usuario" src="assets/imgs/logoF2.png" (click)="!dale?dale=1:dale=dale+1;huevo=dale>4" >
       <ion-textarea *ngIf="!this.usuario" value="Usuario no registrado" readonly style="text-align-last: center;" ></ion-textarea>
       <img *ngIf="this.usuario" width="150px"  src={{this.miAvatar}} />
       <ion-textarea [(ngModel)]="this.usuario" readonly style="text-align-last: center;" ></ion-textarea>
-      
+      <!-- huevo de Pascua -->
+      <br><br>
+      <div *ngIf="huevo">
+        <hr>
+        <h1>¡¡Mi huevo de Pascua!!</h1>
+        <p>Vale ya de tocar las … cositas, no?</p>
+        <p>{{dale}} toquecitos y .. ¿qué más esperabas que saliera?</p>
+        <br>
+        <p>Autores: Dani, Jose, Obdulia y Angel !!</p>
+        <hr>
+      </div>
   </div>
 
   <div *ngIf="historico">
