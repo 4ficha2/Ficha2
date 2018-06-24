@@ -9,7 +9,7 @@
 
 <ion-content>
   <div id= "avatar">
-      <img *ngIf="!this.usuario" width="80px" src="{{imagen}}">
+      <img *ngIf="!this.usuario" width="80px" src="../../assets/imgs/logoF2.png">
       <img *ngIf="this.usuario" width="150px"  src={{this.miAvatar}} />
       <ion-textarea [(ngModel)]="this.usuario" readonly style="text-align-last: center;" ></ion-textarea>
       <ion-textarea *ngIf="!this.usuario" readonly style="text-align-last: center;" >No hay sesión iniciada</ion-textarea>
