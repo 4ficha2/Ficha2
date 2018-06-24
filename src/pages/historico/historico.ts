@@ -27,7 +27,6 @@ export class HistoricoPage {
               private miVarGlobal: VarGlobal,
               public emailComposer:EmailComposer ){
 
-    this.imagen = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEfuU8v4pn3n3fR6NLRxBJ2yganPzoFx9hl7iwqx6DC1plU9-Z"; // imagen del alumno (¿poner enlace en el json?)
     this.usuario=this.miVarGlobal.globalAny;
     this.miAvatar=this.miVarGlobal.avatar;        //Avatar
   }
