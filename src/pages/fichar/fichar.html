@@ -10,7 +10,7 @@
 <ion-content padding>
   <br>
   <div class="avatar">
-    <img *ngIf="!this.usuario" src="assets/imgs/logoF2.png" />
+    <img *ngIf="!this.usuario" src="assets/imgs/logoF2-1.png" />
     <ion-textarea *ngIf="!this.usuario" value="Usuario no registrado" readonly style="text-align-last: center;" ></ion-textarea>
     <img *ngIf="this.usuario" src={{this.miAvatar}} />  <!--src="../../assets/imgs/acachonAvatar.png"-->
     <ion-textarea readonly style="text-align-last: center;" [(ngModel)]="this.usuario"></ion-textarea>

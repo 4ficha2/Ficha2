@@ -1,41 +1,39 @@
 historico {
-    @import url('https://fonts.googleapis.com/css?family=Rokkitt');
-    font-family: 'Rokkitt', serif;
+    @import url('https://fonts.googleapis.com/css?family=Nunito|Ubuntu');
+    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Nunito', sans-serif;
     
     #avatar{
         text-align: center;
         margin-top: 10px;
-    }
-    img{
-        width: 100px;
         border-radius: 50%;
     }
     .azul{
-        background: #2f8a8a;
+        background: #0396A6;
         color: whitesmoke;
         font-size: 18pt;
     }
     .rojo{
-        background: #8a2f2f;
+        background: #c52165;
         color: whitesmoke;
         font-size: 18pt;
     }
     .amarillo {
-        background: #ffa216;
+        background:#FB8C00;
         color: whitesmoke;
         font-size: 18pt;
     }
     .azul_claro {
-        background: #b0f1f1;
+        background: #71DDE3;
         font-size: 14pt;
     }
 
     .amarillo_claro{        
-        background: #f1eab0;
+        background: #EED21B;
         font-size: 14pt;
     }
     .rojo_claro {
-        background: #f1b0b0;
+        background: #FFBCEA;
         font-size: 14pt;
     }
 }

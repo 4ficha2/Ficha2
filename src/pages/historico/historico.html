@@ -9,7 +9,7 @@
 
 <ion-content>
   <div id= "avatar">
-      <img *ngIf="!this.usuario" src="assets/imgs/logoF2.png" (click)="!dale?dale=1:dale=dale+1;huevo=dale>4" >
+      <img *ngIf="!this.usuario" src="assets/imgs/logoF2-1.png" (click)="!dale?dale=1:dale=dale+1;huevo=dale>4" >
       <ion-textarea *ngIf="!this.usuario" value="Usuario no registrado" readonly style="text-align-last: center;" ></ion-textarea>
       <img *ngIf="this.usuario" width="150px"  src={{this.miAvatar}} />
       <ion-textarea [(ngModel)]="this.usuario" readonly style="text-align-last: center;" ></ion-textarea>

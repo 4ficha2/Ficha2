@@ -1,3 +1,9 @@
+/**
+ * @author  Angel Cachon 
+ * 
+ * 
+ */
+
 import { Component } from '@angular/core';
 import { Hotspot } from '@ionic-native/hotspot';  
 import { HotspotNetwork } from '@ionic-native/hotspot';
