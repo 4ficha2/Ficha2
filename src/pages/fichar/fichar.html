@@ -45,9 +45,9 @@
     <button *ngIf="listadoEventos" type="submit" ion-button block (click)="botonFichar()">Fichar</button>
 
   <br><br>
-  <ion-item text-wrap>
+  <ion-item>
     <ion-label color="primary" stacked >{{this.nombreEvento}} </ion-label>
-    <ion-input readonly type="text" [(ngModel)]="this.mensajeEvento" placeholder="Selecciona un evento primero y Ficha!!"></ion-input>
+    <ion-textarea row="10" readonly type="text" [(ngModel)]="this.mensajeEvento" placeholder="Selecciona un evento primero y Ficha!!"></ion-textarea>
   </ion-item>
 
 
